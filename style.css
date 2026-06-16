@@ -416,19 +416,19 @@ body {
     .manual-content-box {
         width: 95%;
         height: 90%;
-        padding: 20px 15px;
+        padding: 50px 15px 20px 15px;
     }
 
     .manual-title {
         font-size: 1.2rem;
         margin-bottom: 15px;
-        padding-right: 60px;
+        padding-right: 0;
     }
 
     .close-btn {
-        top: 20px;
-        right: 15px;
-        padding: 3px 10px;
+        top: 12px;
+        right: 12px;
+        padding: 4px 12px;
         font-size: 1rem;
     }
 
