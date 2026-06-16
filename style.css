@@ -416,20 +416,21 @@ body {
     .manual-content-box {
         width: 95%;
         height: 90%;
-        padding: 50px 15px 20px 15px;
+        padding: 20px 15px;
     }
 
     .manual-title {
         font-size: 1.2rem;
         margin-bottom: 15px;
-        padding-right: 0;
+        padding-right: 50px;
     }
 
     .close-btn {
-        top: 12px;
-        right: 12px;
+        top: 15px;
+        right: 15px;
         padding: 4px 12px;
         font-size: 1rem;
+        width: auto;
     }
 
     /* Modal Fim de Jogo */
