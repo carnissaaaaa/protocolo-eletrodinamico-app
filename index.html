@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocolo Eletrodinâmico - Escape Room</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="crt-overlay"></div>
+
+    <div id="game-container">
+        
+        <div id="start-screen" class="screen-glitch">
+            <div class="boot-sequence">
+                <p>> Inicializando IFCE-OS v1.0.4...</p>
+                <p>> Verificando núcleos de energia... <span class="error-text">[FALHA]</span></p>
+                <p>> Colapso eletrodinâmico detectado nos 10 setores.</p>
+                <p>> Carregando interface de emergência...</p>
+            </div>
+            
+            <div class="title-container">
+                <div class="logo-icon">⚡</div>
+                <h1>PROTOCOLO ELETRODINÂMICO</h1>
+                <h2 class="subtitle">Modo: Engenharia de Controle</h2>
+            </div>
+            
+            <div class="briefing-box">
+                <h3>[ DIRETRIZES DA MISSÃO ]</h3>
+                <ul class="rules-list">
+                    <li><span class="highlight">OBJETIVO:</span> Restaure os 10 setores da instalação.</li>
+                    <li><span class="highlight">TEMPO:</span> O gerador reserva suporta apenas 05:00 minutos.</li>
+                    <li><span class="highlight">RISCO:</span> Erros causam curto-circuito e reduzem a integridade do sistema.</li>
+                    <li><span class="highlight">SISTEMA:</span> Falhas ocorrem em ordem estocástica (aleatória).</li>
+                </ul>
+            </div>
+            
+            <button id="start-btn" class="cyber-btn">INICIAR OVERRIDE MANUAL</button>
+        </div>
+
+        <div id="game-ui" class="hidden">
+            
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <h2>TERMINAL CENTRAL</h2>
+                    <span class="blinking-dot"></span> <span class="online-text">Conexão Estabelecida</span>
+                    </div>
+                
+                <div class="header-center">
+                    <div class="integrity-container">
+                        <span>INTEGRIDADE DA REDE:</span>
+                        <div class="integrity-bar-bg">
+                            <div id="integrity-bar-fill"></div>
+                        </div>
+                        <span id="integrity-text">100%</span>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button id="audio-toggle-btn" class="discrete-audio-btn">🔊 ÁUDIO ON</button>
+                    
+                    <div id="timer-box">
+                        <span class="timer-label">T-MINUS</span>
+                        <span id="timer-display">05:00</span>
+                    </div>
+                </div>
+            </header>
+
+            <main class="dashboard-layout">
+                <aside class="visual-panel">
+                    
+                    <div class="panel-box database-box">
+                        <h3>BANCO DE DADOS CENTRAL</h3>
+                        <p class="small-desc">>_ Módulo de consulta teórica online.<br>>_ Status: Disponível.</p>
+                        <button id="open-manual-side-btn" class="cyber-btn small-btn w-100">
+                            [ ACESSAR MANUAL DO ENGENHEIRO ]
+                        </button>
+                    </div>
+
+                    <div class="panel-box schematic-box">
+                        <h3 id="circuit-panel-title">DIAGRAMA DO CIRCUITO ATUAL</h3>
+                        
+                        <div id="circuit-wrapper" class="circuit-wrapper">
+                            <div class="circuit-board">
+                                <div id="power-source" class="power-source">
+                                    FONTE AC/DC
+                                    <span id="power-val" class="small-tech">AGUARDANDO...</span>
+                                </div>
+                                
+                                <div class="wire top-wire">
+                                    <div class="electron hidden"></div><div class="electron hidden"></div><div class="electron hidden"></div>
+                                </div>
+                                
+                                <div id="component-slot" class="component offline">
+                                    <span id="comp-status">STATUS: ISOLADO</span>
+                                    <div id="comp-meter" class="meter-bar hidden"><div class="meter-fill"></div></div>
+                                </div>
+                                
+                                <div class="wire bottom-wire">
+                                    <div class="electron hidden"></div><div class="electron hidden"></div><div class="electron hidden"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="circuit-log-box">
+                            <p id="circuit-log" class="circuit-log-text">>_ SISTEMA EM STANDBY...</p>
+                        </div>
+                    </div>
+
+                    <div class="panel-box map-box">
+                        <h3>MAPA DA INSTALAÇÃO (SETORES)</h3>
+                        <div id="facility-map">
+                            </div>
+                    </div>
+                </aside>
+
+                <section class="interaction-panel">
+                    <div class="terminal-screen">
+                        <div class="terminal-header">
+                            <span id="question-title" class="terminal-title">Aguardando dados...</span>
+                        </div>
+                        
+                        <div class="terminal-body">
+                            <p id="question-text" class="typing-text"></p>
+                        </div>
+
+                        <div id="options-grid" class="terminal-options hidden">
+                            </div>
+
+                        <div id="feedback-panel" class="hidden">
+                            <div class="feedback-scanline"></div>
+                            <h3 id="feedback-title"></h3>
+                            <p id="feedback-text"></p>
+                            <button id="next-btn" class="cyber-btn small-btn">CARREGAR PRÓXIMO SETOR</button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <div id="manual-modal" class="hidden">
+            <div class="manual-content-box">
+                <button id="close-manual-btn" class="cyber-btn close-btn">X</button>
+                <h2 class="manual-title">>> ARQUIVO CONFIDENCIAL: ELETRODINÂMICA</h2>
+                
+                <div class="manual-scroll-area">
+                    <div class="manual-topic">
+                        <h4>[01] CORRENTE ELÉTRICA (I)</h4>
+                        <p>É o fluxo ordenado de portadores de carga (elétrons livres, em metais) através de um condutor. É medida em Ampères (A). Lembre-se: equipamentos com potências altas operando em redes de baixa tensão exigem um fluxo massivo de corrente para funcionar, exigindo disjuntores compatíveis.</p>
+                    </div>
+
+                    <div class="manual-topic">
+                        <h4>[02] DIFERENÇA DE POTENCIAL (DDP / TENSÃO)</h4>
+                        <p>A "pressão" que impulsiona os elétrons pelo sistema. Se mapearmos o sistema elétrico como um circuito hidráulico analógico, a DDP atua exatamente como a <strong>bomba d'água</strong>, gerando a pressão necessária para criar a vazão da corrente.</p>
+                    </div>
+
+                    <div class="manual-topic">
+                        <h4>[03] RESISTÊNCIA ELÉTRICA & BIOSSEGURANÇA</h4>
+                        <p>A oposição natural à passagem de energia. O corpo humano possui alta resistência com a pele seca (~100.000 Ω). Contudo, <strong>a umidade (botas ou mãos molhadas) derruba essa barreira para ~1.000 Ω</strong>, permitindo correntes letais na casa dos miliamperes.</p>
+                    </div>
+
+                    <div class="manual-topic">
+                        <h4>[04] FUNÇÃO DOS RESISTORES</h4>
+                        <p>Componentes cujo propósito é limitar a corrente e realizar conversão térmica pura. Dispositivos de aquecimento operam convertendo 100% da energia elétrica em calor (Efeito Joule útil), ao contrário de motores ou leds.</p>
+                    </div>
+
+                    <div class="manual-topic">
+                        <h4>[05] EFEITOS DA CORRENTE (TÉRMICO)</h4>
+                        <p>A passagem de elétrons causa atrito atômico, gerando calor (Efeito Joule). O limite térmico de um cabo ($P = R \cdot I^2$) não deve ser quebrado. Se uma bateria sofrer curto, sua própria resistência interna sofrerá o efeito térmico, podendo explodir.</p>
+                    </div>
+
+                    <div class="manual-topic">
+                        <h4>[06] IDENTIFICAÇÃO DE RISCOS: CURTO vs SOBRECARGA</h4>
+                        <ul>
+                            <li><strong>Curto-Circuito:</strong> Falha instantânea. Fio Fase encosta no Neutro, a resistência cai a zero e a corrente atinge picos num estalo elétrico.</li>
+                            <li><strong>Sobrecarga:</strong> Falha térmica e progressiva. Causada por empilhar aparelhos no mesmo barramento. A resistência diminui gradualmente, esquentando os cabos.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="endgame-modal" class="hidden">
+            <div id="modal-content-box" class="modal-content">
+                <div id="modal-icon" class="modal-icon warning-pulse">⏳</div>
+                <h1 id="modal-title">TEMPO ESGOTADO</h1>
+                <p id="modal-desc">O gerador reserva falhou. A instalação entrou em colapso escuro.</p>
+                <div class="modal-stats">
+                    <span id="modal-restored">Setores Restaurados: 0/10</span>
+                </div>
+                <button id="restart-btn" class="cyber-btn">REINICIAR SISTEMA</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
